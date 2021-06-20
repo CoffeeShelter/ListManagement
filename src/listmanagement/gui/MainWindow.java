@@ -42,7 +42,7 @@ public class MainWindow extends JFrame {
 	private JSpinner endDateSpinner;
 
 	public MainWindow() {
-		setTitle("ÄÚ·Î³ª ¸íºÎ °ü¸® ÇÁ·Î±×·¥");
+		setTitle("ì½”ë¡œë‚˜ ëª…ë¶€ ê´€ë¦¬ í”„ë¡œê·¸ë¨");
 		setSize(1028, 760);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
@@ -63,11 +63,11 @@ public class MainWindow extends JFrame {
 		westPanel.setLayout(new GridLayout(10, 1, 0, 20));
 
 		RoundedButton writePageButton = new RoundedButton(new Color(50, 50, 50), new Color(250, 250, 250));
-		writePageButton.setText("¸íºÎ ÀÛ¼º");
+		writePageButton.setText("ëª…ë¶€ ì‘ì„±");
 		westPanel.add(writePageButton);
 
 		RoundedButton searchPageButton = new RoundedButton(new Color(50, 50, 50), new Color(250, 250, 250));
-		searchPageButton.setText("°Ë»ö");
+		searchPageButton.setText("ê²€ìƒ‰");
 		westPanel.add(searchPageButton);
 
 		JPanel centerPanel = new JPanel();
@@ -80,8 +80,8 @@ public class MainWindow extends JFrame {
 		centerPanel.add(headerPanel, BorderLayout.NORTH);
 		headerPanel.setLayout(new BorderLayout(0, 0));
 
-		JLabel headerLabel = new JLabel("¸íºÎ ÀÛ¼º");
-		headerLabel.setFont(new Font("±¼¸²", Font.BOLD, 30));
+		JLabel headerLabel = new JLabel("ëª…ë¶€ ì‘ì„±");
+		headerLabel.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 30));
 		headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		headerLabel.setPreferredSize(new Dimension(512, 0));
 		headerPanel.add(headerLabel, BorderLayout.CENTER);
@@ -96,7 +96,7 @@ public class MainWindow extends JFrame {
 
 		JPanel writePanel = new JPanel();
 		writePanel.setBackground(Color.LIGHT_GRAY);
-		viewPanel.add(writePanel, "¸íºÎ ÀÛ¼º");
+		viewPanel.add(writePanel, "ëª…ë¶€ ì‘ì„±");
 		writePanel.setLayout(null);
 
 		JPanel boxPanel = new JPanel();
@@ -104,8 +104,8 @@ public class MainWindow extends JFrame {
 		boxPanel.setLayout(null);
 		writePanel.add(boxPanel);
 
-		JLabel addLabel = new JLabel("\uC8FC\uC18C");
-		addLabel.setFont(new Font("±¼¸²", Font.BOLD, 14));
+		JLabel addLabel = new JLabel("ì£¼ì†Œ");
+		addLabel.setFont(new Font("êµ´ë¦¼", Font.BOLD, 14));
 		addLabel.setBounds(50, 68, 130, 15);
 		addLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		boxPanel.add(addLabel);
@@ -115,8 +115,8 @@ public class MainWindow extends JFrame {
 		boxPanel.add(addTextField);
 		addTextField.setColumns(10);
 
-		JLabel pNumLabel = new JLabel("\uD578\uB4DC\uD3F0 \uBC88\uD638");
-		pNumLabel.setFont(new Font("±¼¸²", Font.BOLD, 14));
+		JLabel pNumLabel = new JLabel("í•¸ë“œí° ë²ˆí˜¸");
+		pNumLabel.setFont(new Font("êµ´ë¦¼", Font.BOLD, 14));
 		pNumLabel.setBounds(50, 104, 130, 15);
 		pNumLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		boxPanel.add(pNumLabel);
@@ -126,8 +126,8 @@ public class MainWindow extends JFrame {
 		boxPanel.add(pNumTextField);
 		pNumTextField.setColumns(10);
 
-		JLabel etcLabel = new JLabel("\uAE30\uD0C0 \uC0AC\uD56D");
-		etcLabel.setFont(new Font("±¼¸²", Font.BOLD, 14));
+		JLabel etcLabel = new JLabel("ê¸°íƒ€ ì‚¬í•­");
+		etcLabel.setFont(new Font("êµ´ë¦¼", Font.BOLD, 14));
 		etcLabel.setBounds(50, 142, 130, 15);
 		etcLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		boxPanel.add(etcLabel);
@@ -138,30 +138,30 @@ public class MainWindow extends JFrame {
 		etcTextField.setColumns(10);
 
 		RoundedButton button = new RoundedButton(new Color(50, 50, 50), new Color(250, 250, 250));
-		button.setText("ÀÔ·Â");
-		button.setFont(new Font("±¼¸²", Font.BOLD, 12));
+		button.setText("ì…ë ¥");
+		button.setFont(new Font("êµ´ë¦¼", Font.BOLD, 12));
 		button.setBounds(289, 181, 97, 23);
 		button.addActionListener(new ListInputAction(addTextField, pNumTextField, etcTextField));
 		boxPanel.add(button);
 
-		JLabel exAdd = new JLabel("ex) \uBD09\uBA85\uB3D9");
-		exAdd.setFont(new Font("±¼¸²", Font.BOLD, 14));
+		JLabel exAdd = new JLabel("ex) ë´‰ëª…ë™");
+		exAdd.setFont(new Font("êµ´ë¦¼", Font.BOLD, 14));
 		exAdd.setBounds(400, 68, 200, 15);
 		boxPanel.add(exAdd);
 
 		JLabel expNum = new JLabel("ex) 010-1234-5678");
-		expNum.setFont(new Font("±¼¸²", Font.BOLD, 14));
+		expNum.setFont(new Font("êµ´ë¦¼", Font.BOLD, 14));
 		expNum.setBounds(400, 104, 200, 15);
 		boxPanel.add(expNum);
 
-		JLabel exEtc = new JLabel("ex) \uD574\uC678 \uBC29\uBB38");
-		exEtc.setFont(new Font("±¼¸²", Font.BOLD, 14));
+		JLabel exEtc = new JLabel("ex) 2ì£¼ ì „ í•´ì™¸ ë°©ë¬¸");
+		exEtc.setFont(new Font("êµ´ë¦¼", Font.BOLD, 14));
 		exEtc.setBounds(400, 142, 200, 15);
 		boxPanel.add(exEtc);
 
 		JPanel searchPanel = new JPanel();
 		searchPanel.setBackground(Color.LIGHT_GRAY);
-		viewPanel.add(searchPanel, "°Ë»ö");
+		viewPanel.add(searchPanel, "ê²€ìƒ‰");
 		searchPanel.setLayout(new BorderLayout(0, 0));
 
 		JPanel searchNorthPanel = new JPanel();
@@ -185,14 +185,14 @@ public class MainWindow extends JFrame {
 
 		SpinnerDateModel startDateModel = new SpinnerDateModel(value, start, end, Calendar.YEAR);
 		startDateSpinner = new JSpinner(startDateModel);
-		startDateSpinner.setFont(new Font("±¼¸²", Font.BOLD, 12));
+		startDateSpinner.setFont(new Font("êµ´ë¦¼", Font.BOLD, 12));
 		startDateSpinner.setBounds(56, 10, 212, 22);
-		startDateSpinner.setEditor(new JSpinner.DateEditor(startDateSpinner, "yyyy/MM/dd")); // ³¯Â¥ ÆíÁı±â ÁöÁ¤
+		startDateSpinner.setEditor(new JSpinner.DateEditor(startDateSpinner, "yyyy/MM/dd")); // ï¿½ï¿½Â¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 		searchNorthPanel.add(startDateSpinner);
 
 		JLabel label = new JLabel("~");
-		label.setFont(new Font("±¼¸²", Font.BOLD, 12));
+		label.setFont(new Font("êµ´ë¦¼", Font.BOLD, 12));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setBounds(280, 13, 43, 15);
 		searchNorthPanel.add(label);
@@ -207,13 +207,13 @@ public class MainWindow extends JFrame {
 
 		SpinnerDateModel endDateModel = new SpinnerDateModel(endValue, endStart, endEnd, Calendar.YEAR);
 		endDateSpinner = new JSpinner(endDateModel);
-		endDateSpinner.setFont(new Font("±¼¸²", Font.BOLD, 12));
-		endDateSpinner.setEditor(new JSpinner.DateEditor(endDateSpinner, "yyyy/MM/dd")); // ³¯Â¥ ÆíÁı±â ÁöÁ¤
+		endDateSpinner.setFont(new Font("êµ´ë¦¼", Font.BOLD, 12));
+		endDateSpinner.setEditor(new JSpinner.DateEditor(endDateSpinner, "yyyy/MM/dd")); // ï¿½ï¿½Â¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		searchNorthPanel.add(endDateSpinner);
 		endDateSpinner.setBounds(335, 10, 212, 22);
 
 		RoundedButton searchButton = new RoundedButton(new Color(50, 50, 50), new Color(250, 250, 250));
-		searchButton.setText("°Ë»ö");
+		searchButton.setText("ê²€ìƒ‰");
 		searchButton.setBounds(592, 10, 80, 80);
 		searchNorthPanel.add(searchButton);
 
@@ -222,8 +222,8 @@ public class MainWindow extends JFrame {
 		searchNorthPanel.add(textField);
 		textField.setColumns(10);
 
-		JLabel infoLabel = new JLabel("\uC8FC\uC18C:");
-		infoLabel.setFont(new Font("±¼¸²", Font.BOLD, 14));
+		JLabel infoLabel = new JLabel("ì£¼ì†Œ:");
+		infoLabel.setFont(new Font("êµ´ë¦¼", Font.BOLD, 14));
 		infoLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		infoLabel.setBounds(217, 68, 106, 15);
 		searchNorthPanel.add(infoLabel);
@@ -236,7 +236,7 @@ public class MainWindow extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		searchPanel.add(scrollPane, BorderLayout.CENTER);
 
-		String header[] = { "³¯Â¥", "°ÅÁÖÁö", "ÇÚµåÆù ¹øÈ£", "ºñ°í" };
+		String header[] = { "ë‚ ì§œ", "ê±°ì£¼ì§€", "í•¸ë“œí° ë²ˆí˜¸", "ë¹„ê³ " };
 		DefaultTableModel tableModel = new DefaultTableModel(header, 0) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -268,7 +268,7 @@ public class MainWindow extends JFrame {
 		searchButton.addActionListener(new SearchAction(table, startDateSpinner, endDateSpinner, textField));
 
 		RoundedButton refreshButton = new RoundedButton(new Color(50, 50, 50), new Color(250, 250, 250));
-		refreshButton.setText("»õ·Î°íÄ§");
+		refreshButton.setText("ìƒˆë¡œê³ ì¹¨");
 		refreshButton.setBounds(56, 64, 86, 23);
 		searchNorthPanel.add(refreshButton);
 		refreshButton.addActionListener(new ActionListener() {
@@ -296,7 +296,7 @@ public class MainWindow extends JFrame {
 
 		endDateSpinner.setValue(endValue);
 
-		String header[] = { "³¯Â¥", "°ÅÁÖÁö", "ÇÚµåÆù ¹øÈ£", "ºñ°í" };
+		String header[] = { "ë‚ ì§œ", "ê±°ì£¼ì§€", "í•¸ë“œí° ë²ˆí˜¸", "ë¹„ê³ " };
 		DefaultTableModel tableModel = new DefaultTableModel(header, 0) {
 			@Override
 			public boolean isCellEditable(int row, int column) {

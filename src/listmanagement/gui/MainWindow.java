@@ -93,7 +93,11 @@ public class MainWindow extends JFrame {
 		headerPanel.setLayout(new BorderLayout(0, 0));
 
 		JLabel headerLabel = new JLabel("명부 작성");
+<<<<<<< HEAD
 		headerLabel.setFont(new Font("굴림", Font.BOLD, 30));
+=======
+		headerLabel.setFont(new Font("����", Font.BOLD, 30));
+>>>>>>> 8209e4768b8e80b30de07b4653219b069e873b10
 		headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		headerLabel.setPreferredSize(new Dimension(512, 0));
 		headerPanel.add(headerLabel, BorderLayout.CENTER);
@@ -199,7 +203,11 @@ public class MainWindow extends JFrame {
 		startDateSpinner = new JSpinner(startDateModel);
 		startDateSpinner.setFont(new Font("굴림", Font.BOLD, 12));
 		startDateSpinner.setBounds(56, 10, 212, 22);
+<<<<<<< HEAD
 		startDateSpinner.setEditor(new JSpinner.DateEditor(startDateSpinner, "yyyy/MM/dd")); // 날짜 편집기 지정
+=======
+		startDateSpinner.setEditor(new JSpinner.DateEditor(startDateSpinner, "yyyy/MM/dd")); // ��¥ ������ ����
+>>>>>>> 8209e4768b8e80b30de07b4653219b069e873b10
 
 		searchNorthPanel.add(startDateSpinner);
 
@@ -220,7 +228,11 @@ public class MainWindow extends JFrame {
 		SpinnerDateModel endDateModel = new SpinnerDateModel(endValue, endStart, endEnd, Calendar.YEAR);
 		endDateSpinner = new JSpinner(endDateModel);
 		endDateSpinner.setFont(new Font("굴림", Font.BOLD, 12));
+<<<<<<< HEAD
 		endDateSpinner.setEditor(new JSpinner.DateEditor(endDateSpinner, "yyyy/MM/dd")); // 날짜 편집기 지정
+=======
+		endDateSpinner.setEditor(new JSpinner.DateEditor(endDateSpinner, "yyyy/MM/dd")); // ��¥ ������ ����
+>>>>>>> 8209e4768b8e80b30de07b4653219b069e873b10
 		searchNorthPanel.add(endDateSpinner);
 		endDateSpinner.setBounds(335, 10, 212, 22);
 

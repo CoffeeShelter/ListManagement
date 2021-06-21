@@ -8,12 +8,16 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -25,11 +29,16 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import org.apache.poi.EncryptedDocumentException;
+
+import com.sun.jmx.snmp.Timestamp;
+
 import listmanagement.action.ListInputAction;
 import listmanagement.action.SearchAction;
 import listmanagement.action.SelectorAction;
 import listmanagement.db.List;
 import listmanagement.db.ListDAO;
+import listmanagement.file.ExcelManagement;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
@@ -41,6 +50,9 @@ public class MainWindow extends JFrame {
 
 	private JSpinner startDateSpinner;
 	private JSpinner endDateSpinner;
+	private JTextField pathField;
+
+	private Vector<List> currentList = new Vector<>();
 
 	public MainWindow() {
 		setTitle("코로나 명부 관리 프로그램");
@@ -82,7 +94,11 @@ public class MainWindow extends JFrame {
 		headerPanel.setLayout(new BorderLayout(0, 0));
 
 		JLabel headerLabel = new JLabel("명부 작성");
+
+		headerLabel.setFont(new Font("굴림", Font.BOLD, 30));
+
 		headerLabel.setFont(new Font("����", Font.BOLD, 30));
+
 		headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		headerLabel.setPreferredSize(new Dimension(512, 0));
 		headerPanel.add(headerLabel, BorderLayout.CENTER);
@@ -188,6 +204,9 @@ public class MainWindow extends JFrame {
 		startDateSpinner = new JSpinner(startDateModel);
 		startDateSpinner.setFont(new Font("굴림", Font.BOLD, 12));
 		startDateSpinner.setBounds(56, 10, 212, 22);
+
+		startDateSpinner.setEditor(new JSpinner.DateEditor(startDateSpinner, "yyyy/MM/dd")); // 날짜 편집기 지정
+
 		startDateSpinner.setEditor(new JSpinner.DateEditor(startDateSpinner, "yyyy/MM/dd")); // ��¥ ������ ����
 
 		searchNorthPanel.add(startDateSpinner);
@@ -209,7 +228,11 @@ public class MainWindow extends JFrame {
 		SpinnerDateModel endDateModel = new SpinnerDateModel(endValue, endStart, endEnd, Calendar.YEAR);
 		endDateSpinner = new JSpinner(endDateModel);
 		endDateSpinner.setFont(new Font("굴림", Font.BOLD, 12));
+
+		endDateSpinner.setEditor(new JSpinner.DateEditor(endDateSpinner, "yyyy/MM/dd")); // 날짜 편집기 지정
+
 		endDateSpinner.setEditor(new JSpinner.DateEditor(endDateSpinner, "yyyy/MM/dd")); // ��¥ ������ ����
+
 		searchNorthPanel.add(endDateSpinner);
 		endDateSpinner.setBounds(335, 10, 212, 22);
 
@@ -248,6 +271,7 @@ public class MainWindow extends JFrame {
 		ListDAO listDAO = new ListDAO();
 		Vector<List> listVector = new Vector<>();
 		listVector = listDAO.getList();
+		currentList = listVector;
 
 		if (listVector != null) {
 			for (List list : listVector) {
@@ -265,13 +289,63 @@ public class MainWindow extends JFrame {
 		table.setModel(tableModel);
 		scrollPane.setViewportView(table);
 
-		textField.addActionListener(new SearchAction(table, startDateSpinner, endDateSpinner, textField));
-		searchButton.addActionListener(new SearchAction(table, startDateSpinner, endDateSpinner, textField));
+		textField.addActionListener(new SearchAction(table, startDateSpinner, endDateSpinner, textField, this));
+		searchButton
+				.addActionListener(new SearchAction(table, startDateSpinner, endDateSpinner, textField, this));
 
 		RoundedButton refreshButton = new RoundedButton(new Color(50, 50, 50), new Color(250, 250, 250));
 		refreshButton.setText("새로고침");
 		refreshButton.setBounds(56, 64, 86, 23);
 		searchNorthPanel.add(refreshButton);
+
+		JPanel searchSouthPanel = new JPanel();
+		searchSouthPanel.setBorder(
+				new TitledBorder(null, "엑셀 파일로 내보내기", TitledBorder.LEFT, TitledBorder.TOP, null, Color.BLACK));
+		searchSouthPanel.setBackground(Color.GRAY);
+		searchSouthPanel.setPreferredSize(new Dimension(0, 80));
+		searchPanel.add(searchSouthPanel, BorderLayout.SOUTH);
+		searchSouthPanel.setLayout(null);
+
+		pathField = new JTextField();
+		pathField.setText("");
+		pathField.setBounds(56, 33, 362, 21);
+		searchSouthPanel.add(pathField);
+		pathField.setColumns(10);
+
+		RoundedButton selectPathButton = new RoundedButton(new Color(100, 100, 100), new Color(250, 250, 250));
+		selectPathButton.setText("경로 선택");
+		selectPathButton.setBounds(430, 32, 97, 23);
+		searchSouthPanel.add(selectPathButton);
+
+		selectPathButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				File file = selectPath();
+				String path = file.getPath();
+				path += "\\list.xlsx";
+				pathField.setText(path);
+			}
+		});
+
+		RoundedButton saveButton = new RoundedButton(new Color(50, 50, 50), new Color(250, 250, 250));
+		saveButton.setText("저장");
+		saveButton.setFont(new Font("굴림", Font.BOLD, 15));
+		saveButton.setBounds(586, 18, 50, 50);
+		searchSouthPanel.add(saveButton);
+		saveButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ExcelManagement excel = new ExcelManagement(pathField.getText());
+				try {
+					excel.writeExcelFile(currentList);
+				} catch (EncryptedDocumentException | IOException e1) {
+					e1.printStackTrace();
+				}
+				pathField.setText("");
+				JOptionPane.showMessageDialog(null, "저장 완료");
+			}
+		});
+
 		refreshButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -308,6 +382,7 @@ public class MainWindow extends JFrame {
 		ListDAO listDAO = new ListDAO();
 		Vector<List> listVector = new Vector<>();
 		listVector = listDAO.getList();
+		setCurrentList(listVector);
 
 		if (listVector != null) {
 			for (List list : listVector) {
@@ -323,4 +398,20 @@ public class MainWindow extends JFrame {
 
 		table.setModel(tableModel);
 	}
+
+	public File selectPath() {
+		JFileChooser jfc = new JFileChooser();
+		jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		int returnVal = jfc.showSaveDialog(null);
+		if (returnVal == 0) {
+			return jfc.getSelectedFile();
+		}
+
+		return null;
+	}
+	
+	public void setCurrentList(Vector<List> lists) {
+		this.currentList = lists;
+	}
+	
 }

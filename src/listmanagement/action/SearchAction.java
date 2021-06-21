@@ -13,24 +13,36 @@ import javax.swing.table.DefaultTableModel;
 
 import listmanagement.db.List;
 import listmanagement.db.ListDAO;
+import listmanagement.gui.MainWindow;
 
 public class SearchAction implements ActionListener {
 
+<<<<<<< HEAD
 	//private ListDAO listDAO = new ListDAO();
 	//private Vector<List> lists = new Vector<>();
 
+=======
+	private ListDAO listDAO = new ListDAO();
+	
+>>>>>>> 339e39557ee1db6b0ef085700c466b6e431c598a
 	private JTable table;
 	private JSpinner start;
 	private JSpinner end;
 	private JTextField add;
+	
+	private MainWindow frame;
 
-	public SearchAction(JTable table, JSpinner start, JSpinner end, JTextField add) {
+	public SearchAction(JTable table, JSpinner start, JSpinner end, JTextField add, MainWindow frame) {
 		this.table = table;
 		this.start = start;
 		this.end = end;
 		this.add = add;
 
+<<<<<<< HEAD
 		//this.lists = listDAO.getList();
+=======
+		this.frame = frame;
+>>>>>>> 339e39557ee1db6b0ef085700c466b6e431c598a
 	}
 
 	@Override
@@ -43,6 +55,7 @@ public class SearchAction implements ActionListener {
 		
 		ListDAO listDAO = new ListDAO();
 		Vector<List> lists = listDAO.search(startStamp, endStamp, add.getText());
+		frame.setCurrentList(lists);
 		
 		add.setText("");
 		

@@ -21,19 +21,21 @@ public class SearchAction implements ActionListener {
 
 	private ListDAO listDAO = new ListDAO();
 	private Vector<List> lists = new Vector<>();
-
+	private Vector<List> currentList;
+	
 	private JTable table;
 	private JSpinner start;
 	private JSpinner end;
 	private JTextField add;
 
-	public SearchAction(JTable table, JSpinner start, JSpinner end, JTextField add) {
+	public SearchAction(JTable table, JSpinner start, JSpinner end, JTextField add, Vector<List> currentList) {
 		this.table = table;
 		this.start = start;
 		this.end = end;
 		this.add = add;
 
 		this.lists = listDAO.getList();
+		this.currentList = currentList;
 	}
 
 	@Override
@@ -46,10 +48,12 @@ public class SearchAction implements ActionListener {
 		
 		ListDAO listDAO = new ListDAO();
 		Vector<List> lists = listDAO.search(startStamp, endStamp, add.getText());
+		currentList = lists;
 		
 		add.setText("");
 		
-		String header[] = { "³¯Â¥", "°ÅÁÖÁö", "ÇÚµåÆù ¹øÈ£", "ºñ°í" };
+		String header[] = { "ë‚ ì§œ", "ê±°ì£¼ì§€", "í•¸ë“œí° ë²ˆí˜¸", "ë¹„ê³ " };
+		@SuppressWarnings("serial")
 		DefaultTableModel tableModel = new DefaultTableModel(header, 0) {
 			@Override
 			public boolean isCellEditable(int row, int column) {

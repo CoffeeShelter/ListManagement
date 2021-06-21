@@ -52,7 +52,7 @@ public class MainWindow extends JFrame {
 	private JTextField pathField;
 
 	private Vector<List> currentList = new Vector<>();
-	
+
 	public MainWindow() {
 		setTitle("코로나 명부 관리 프로그램");
 		setSize(1028, 760);
@@ -93,11 +93,11 @@ public class MainWindow extends JFrame {
 		headerPanel.setLayout(new BorderLayout(0, 0));
 
 		JLabel headerLabel = new JLabel("명부 작성");
-<<<<<<< HEAD
+
 		headerLabel.setFont(new Font("굴림", Font.BOLD, 30));
-=======
+
 		headerLabel.setFont(new Font("����", Font.BOLD, 30));
->>>>>>> 8209e4768b8e80b30de07b4653219b069e873b10
+
 		headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		headerLabel.setPreferredSize(new Dimension(512, 0));
 		headerPanel.add(headerLabel, BorderLayout.CENTER);
@@ -203,11 +203,10 @@ public class MainWindow extends JFrame {
 		startDateSpinner = new JSpinner(startDateModel);
 		startDateSpinner.setFont(new Font("굴림", Font.BOLD, 12));
 		startDateSpinner.setBounds(56, 10, 212, 22);
-<<<<<<< HEAD
+
 		startDateSpinner.setEditor(new JSpinner.DateEditor(startDateSpinner, "yyyy/MM/dd")); // 날짜 편집기 지정
-=======
+
 		startDateSpinner.setEditor(new JSpinner.DateEditor(startDateSpinner, "yyyy/MM/dd")); // ��¥ ������ ����
->>>>>>> 8209e4768b8e80b30de07b4653219b069e873b10
 
 		searchNorthPanel.add(startDateSpinner);
 
@@ -228,11 +227,11 @@ public class MainWindow extends JFrame {
 		SpinnerDateModel endDateModel = new SpinnerDateModel(endValue, endStart, endEnd, Calendar.YEAR);
 		endDateSpinner = new JSpinner(endDateModel);
 		endDateSpinner.setFont(new Font("굴림", Font.BOLD, 12));
-<<<<<<< HEAD
+
 		endDateSpinner.setEditor(new JSpinner.DateEditor(endDateSpinner, "yyyy/MM/dd")); // 날짜 편집기 지정
-=======
+
 		endDateSpinner.setEditor(new JSpinner.DateEditor(endDateSpinner, "yyyy/MM/dd")); // ��¥ ������ ����
->>>>>>> 8209e4768b8e80b30de07b4653219b069e873b10
+
 		searchNorthPanel.add(endDateSpinner);
 		endDateSpinner.setBounds(335, 10, 212, 22);
 
@@ -272,7 +271,7 @@ public class MainWindow extends JFrame {
 		Vector<List> listVector = new Vector<>();
 		listVector = listDAO.getList();
 		currentList = listVector;
-		
+
 		if (listVector != null) {
 			for (List list : listVector) {
 				String u[] = new String[4];
@@ -289,8 +288,9 @@ public class MainWindow extends JFrame {
 		table.setModel(tableModel);
 		scrollPane.setViewportView(table);
 
-		textField.addActionListener(new SearchAction(table, startDateSpinner, endDateSpinner, textField, currentList));
-		searchButton.addActionListener(new SearchAction(table, startDateSpinner, endDateSpinner, textField, currentList));
+		textField.addActionListener(new SearchAction(table, startDateSpinner, endDateSpinner, textField, this));
+		searchButton
+				.addActionListener(new SearchAction(table, startDateSpinner, endDateSpinner, textField, this));
 
 		RoundedButton refreshButton = new RoundedButton(new Color(50, 50, 50), new Color(250, 250, 250));
 		refreshButton.setText("새로고침");
@@ -298,8 +298,8 @@ public class MainWindow extends JFrame {
 		searchNorthPanel.add(refreshButton);
 
 		JPanel searchSouthPanel = new JPanel();
-		searchSouthPanel.setBorder(new TitledBorder(null, "엑셀 파일로 내보내기",
-				TitledBorder.LEFT, TitledBorder.TOP, null, Color.BLACK));
+		searchSouthPanel.setBorder(
+				new TitledBorder(null, "엑셀 파일로 내보내기", TitledBorder.LEFT, TitledBorder.TOP, null, Color.BLACK));
 		searchSouthPanel.setBackground(Color.GRAY);
 		searchSouthPanel.setPreferredSize(new Dimension(0, 80));
 		searchPanel.add(searchSouthPanel, BorderLayout.SOUTH);
@@ -315,7 +315,7 @@ public class MainWindow extends JFrame {
 		selectPathButton.setText("경로 선택");
 		selectPathButton.setBounds(430, 32, 97, 23);
 		searchSouthPanel.add(selectPathButton);
-		
+
 		selectPathButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -325,7 +325,6 @@ public class MainWindow extends JFrame {
 				pathField.setText(path);
 			}
 		});
-		
 
 		RoundedButton saveButton = new RoundedButton(new Color(50, 50, 50), new Color(250, 250, 250));
 		saveButton.setText("저장");
@@ -345,8 +344,7 @@ public class MainWindow extends JFrame {
 				JOptionPane.showMessageDialog(null, "저장 완료");
 			}
 		});
-		
-		
+
 		refreshButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -383,7 +381,7 @@ public class MainWindow extends JFrame {
 		ListDAO listDAO = new ListDAO();
 		Vector<List> listVector = new Vector<>();
 		listVector = listDAO.getList();
-		currentList = listVector;
+		setCurrentList(listVector);
 
 		if (listVector != null) {
 			for (List list : listVector) {
@@ -407,7 +405,12 @@ public class MainWindow extends JFrame {
 		if (returnVal == 0) {
 			return jfc.getSelectedFile();
 		}
-		
+
 		return null;
 	}
+	
+	public void setCurrentList(Vector<List> lists) {
+		this.currentList = lists;
+	}
+	
 }

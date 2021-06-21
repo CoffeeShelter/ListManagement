@@ -3,9 +3,6 @@ package listmanagement.action;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 
@@ -16,26 +13,26 @@ import javax.swing.table.DefaultTableModel;
 
 import listmanagement.db.List;
 import listmanagement.db.ListDAO;
+import listmanagement.gui.MainWindow;
 
 public class SearchAction implements ActionListener {
 
 	private ListDAO listDAO = new ListDAO();
-	private Vector<List> lists = new Vector<>();
-	private Vector<List> currentList;
 	
 	private JTable table;
 	private JSpinner start;
 	private JSpinner end;
 	private JTextField add;
+	
+	private MainWindow frame;
 
-	public SearchAction(JTable table, JSpinner start, JSpinner end, JTextField add, Vector<List> currentList) {
+	public SearchAction(JTable table, JSpinner start, JSpinner end, JTextField add, MainWindow frame) {
 		this.table = table;
 		this.start = start;
 		this.end = end;
 		this.add = add;
 
-		this.lists = listDAO.getList();
-		this.currentList = currentList;
+		this.frame = frame;
 	}
 
 	@Override
@@ -48,7 +45,7 @@ public class SearchAction implements ActionListener {
 		
 		ListDAO listDAO = new ListDAO();
 		Vector<List> lists = listDAO.search(startStamp, endStamp, add.getText());
-		currentList = lists;
+		frame.setCurrentList(lists);
 		
 		add.setText("");
 		

@@ -12,36 +12,36 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 
 @SuppressWarnings("serial")
-public class RoundedButton extends JButton {
+public class CircleButton extends JButton {
 	private Color backgroundColor =  new Color(255, 247, 242); // ���� ����
 	private Color fontColor = new Color(247, 99, 12); // ���ڻ� ����
 	
-	public RoundedButton() {
+	public CircleButton() {
 		super();
 		decorate();
 	}
 
-	public RoundedButton(String text) {
+	public CircleButton(String text) {
 		super(text);
 		decorate();
 	}
 
-	public RoundedButton(Action action) {
+	public CircleButton(Action action) {
 		super(action);
 		decorate();
 	}
 
-	public RoundedButton(Icon icon) {
+	public CircleButton(Icon icon) {
 		super(icon);
 		decorate();
 	}
 
-	public RoundedButton(String text, Icon icon) {
+	public CircleButton(String text, Icon icon) {
 		super(text, icon);
 		decorate();
 	}
 	
-	public RoundedButton(Color bgColor, Color fontColor) {
+	public CircleButton(Color bgColor, Color fontColor) {
 		super();
 		this.backgroundColor = bgColor;
 		this.fontColor = fontColor;
@@ -61,6 +61,7 @@ public class RoundedButton extends JButton {
 		int height = getHeight();
 		Graphics2D graphics = (Graphics2D) g;
 		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		
 		if (getModel().isArmed()) {
 			graphics.setColor(c.darker());
 		} else if (getModel().isRollover()) {
@@ -68,7 +69,8 @@ public class RoundedButton extends JButton {
 		} else {	
 			graphics.setColor(c);
 		}
-		graphics.fillRoundRect(0, 0, width, height, 10, 10);
+
+		graphics.fillOval(0, 0, width, height);
 		FontMetrics fontMetrics = graphics.getFontMetrics();
 		Rectangle stringBounds = fontMetrics.getStringBounds(this.getText(), graphics).getBounds();
 		int textX = (width - stringBounds.width) / 2;

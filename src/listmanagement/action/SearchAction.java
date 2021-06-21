@@ -3,9 +3,6 @@ package listmanagement.action;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 
@@ -19,8 +16,8 @@ import listmanagement.db.ListDAO;
 
 public class SearchAction implements ActionListener {
 
-	private ListDAO listDAO = new ListDAO();
-	private Vector<List> lists = new Vector<>();
+	//private ListDAO listDAO = new ListDAO();
+	//private Vector<List> lists = new Vector<>();
 
 	private JTable table;
 	private JSpinner start;
@@ -33,7 +30,7 @@ public class SearchAction implements ActionListener {
 		this.end = end;
 		this.add = add;
 
-		this.lists = listDAO.getList();
+		//this.lists = listDAO.getList();
 	}
 
 	@Override
@@ -49,7 +46,8 @@ public class SearchAction implements ActionListener {
 		
 		add.setText("");
 		
-		String header[] = { "³¯Â¥", "°ÅÁÖÁö", "ÇÚµåÆù ¹øÈ£", "ºñ°í" };
+		String header[] = { "ë‚ ì§œ", "ê±°ì£¼ì§€", "í•¸ë“œí° ë²ˆí˜¸", "ë¹„ê³ " };
+		@SuppressWarnings("serial")
 		DefaultTableModel tableModel = new DefaultTableModel(header, 0) {
 			@Override
 			public boolean isCellEditable(int row, int column) {

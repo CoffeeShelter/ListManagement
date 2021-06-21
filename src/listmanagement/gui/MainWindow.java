@@ -31,6 +31,7 @@ import listmanagement.action.SelectorAction;
 import listmanagement.db.List;
 import listmanagement.db.ListDAO;
 
+@SuppressWarnings("serial")
 public class MainWindow extends JFrame {
 	private JTextField addTextField;
 	private JTextField pNumTextField;
